@@ -65,7 +65,7 @@ export function SignInForm({
         </div>
         <div className="grid gap-2">
           <div className="flex items-center">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">Senha</Label>
           </div>
           <Input id="password" type="password" {...register("password")} />
           {errors.password && (
@@ -80,7 +80,7 @@ export function SignInForm({
       </div>
       <div className="text-center text-sm">
         Não tem uma conta?{" "}
-        <Link href="/register" className="underline underline-offset-4">
+        <Link href="/sign-up" className="underline underline-offset-4">
           Cadastre-se
         </Link>
       </div>

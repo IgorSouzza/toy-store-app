@@ -1,9 +1,9 @@
 import { GalleryVerticalEnd } from "lucide-react";
 import Link from "next/link";
 
-import { SignInForm } from "./components/sign-in-form";
+import { SignUpForm } from "./components/sign-up-form";
 
-export function SignInPage() {
+export function SignUpPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -17,7 +17,7 @@ export function SignInPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <SignInForm />
+            <SignUpForm />
           </div>
         </div>
       </div>
