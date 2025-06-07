@@ -12,6 +12,7 @@ import { Label } from "@/shared/components/ui/label";
 import { cn } from "@/shared/lib/utils";
 
 import { SignInFormSchema, signInFormSchema } from "../schemas/sign-in-schema";
+import { signInAction } from "../actions/sign-in-action";
 
 export function SignInForm({
   className,
@@ -30,8 +31,7 @@ export function SignInForm({
 
   async function onSignIn(data: SignInFormSchema) {
     try {
-      console.log(data);
-      // await signInAction(data);
+      await signInAction(data);
       router.push("/dashboard");
     } catch (error) {
       if (!(error instanceof Error)) return;

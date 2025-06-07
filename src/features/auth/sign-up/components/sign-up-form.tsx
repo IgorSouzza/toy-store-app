@@ -1,49 +1,49 @@
-'use client'
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
-import { Button } from '@/shared/components/ui/button'
-import { Input } from '@/shared/components/ui/input'
-import { Label } from '@/shared/components/ui/label'
-import { cn } from '@/shared/lib/utils'
+import { Button } from "@/shared/components/ui/button";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
+import { cn } from "@/shared/lib/utils";
 
-import { SignUpFormSchema, signUpFormSchema } from '../schemas/sign-up-schema'
+import { SignUpFormSchema, signUpFormSchema } from "../schemas/sign-up-schema";
+import { signUpAction } from "../actions/sign-up-action";
 
 export function SignUpForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'form'>) {
-  const router = useRouter()
+}: React.ComponentPropsWithoutRef<"form">) {
+  const router = useRouter();
   const signInForm = useForm<SignUpFormSchema>({
     resolver: zodResolver(signUpFormSchema),
-  })
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = signInForm
+  } = signInForm;
 
   async function onSignIn(data: SignUpFormSchema) {
     try {
-      console.log(data);
-      // await signUpAction(data)
-      router.push('/dashboard')
+      await signUpAction(data);
+      router.push("/dashboard");
     } catch (error) {
-      if (!(error instanceof Error)) return
-      toast.error('Uh oh! Something went wrong.', {
+      if (!(error instanceof Error)) return;
+      toast.error("Uh oh! Something went wrong.", {
         description: error.message,
-      })
+      });
     }
   }
 
   return (
     <form
-      className={cn('flex flex-col gap-6', className)}
+      className={cn("flex flex-col gap-6", className)}
       {...props}
       onSubmit={handleSubmit(onSignIn)}
     >
@@ -56,7 +56,7 @@ export function SignUpForm({
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="name">Nome</Label>
-          <Input {...register('name')} />
+          <Input {...register("name")} />
           {errors.name && (
             <p className="text-sm font-medium text-red-500 dark:text-red-400">
               {errors.name.message}
@@ -65,7 +65,7 @@ export function SignUpForm({
         </div>
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input placeholder="m@example.com" {...register('email')} />
+          <Input placeholder="m@example.com" {...register("email")} />
           {errors.email && (
             <p className="text-sm font-medium text-red-500 dark:text-red-400">
               {errors.email.message}
@@ -76,7 +76,7 @@ export function SignUpForm({
           <div className="flex items-center">
             <Label htmlFor="password">Senha</Label>
           </div>
-          <Input id="password" type="password" {...register('password')} />
+          <Input id="password" type="password" {...register("password")} />
           {errors.password && (
             <p className="text-sm font-medium text-red-500 dark:text-red-400">
               {errors.password.message}
@@ -90,7 +90,7 @@ export function SignUpForm({
           <Input
             id="confirm_password"
             type="password"
-            {...register('confirm_password')}
+            {...register("confirm_password")}
           />
           {errors.confirm_password && (
             <p className="text-sm font-medium text-red-500 dark:text-red-400">
@@ -103,11 +103,11 @@ export function SignUpForm({
         </Button>
       </div>
       <div className="text-center text-sm">
-        Já tem uma conta?{' '}
+        Já tem uma conta?{" "}
         <Link href="/sign-in" className="underline underline-offset-4">
           Faça Login
         </Link>
       </div>
     </form>
-  )
+  );
 }
