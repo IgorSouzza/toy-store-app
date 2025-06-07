@@ -6,8 +6,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
+import { Customer } from "@/shared/types/customer";
 
-export function CustomersTable() {
+type CustomersTableProps = {
+  customers: Customer[];
+};
+
+export function CustomersTable({ customers }: CustomersTableProps) {
   return (
     <div className="px-4 lg:px-6">
       <Table>
@@ -21,13 +26,15 @@ export function CustomersTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell>ABCDEFGHIJKLMNOPQRSTUVXYZ</TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-          </TableRow>
+          {customers.map((customer) => (
+            <TableRow key={customer.id}>
+              <TableCell className="font-medium">{customer.name}</TableCell>
+              <TableCell>{customer.email}</TableCell>
+              <TableCell>{customer.birthday}</TableCell>
+              <TableCell>ABCDEFGHIJKLMNOPQRSTUVXYZ</TableCell>
+              <TableCell className="text-right">$250.00</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>

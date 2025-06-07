@@ -8,8 +8,7 @@ import { Button } from "@/shared/components/ui/button";
 import { getCustomersAction } from "./actions/get-customers";
 
 export async function DashboardHomePage() {
-  const customers = await getCustomersAction();
-  console.log(customers);
+  const customersResponse = await getCustomersAction();
 
   return (
     <SidebarProvider
@@ -33,7 +32,7 @@ export async function DashboardHomePage() {
             </div>
             <div className="flex flex-col md:gap-6">
               <Button className="w-fit mx-6 self-end">Adicionar cliente</Button>
-              <CustomersTable />
+              <CustomersTable customers={customersResponse.customers} />
             </div>
           </div>
         </div>
