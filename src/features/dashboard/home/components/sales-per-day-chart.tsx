@@ -2,7 +2,12 @@
 
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/shared/components/ui/chart";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/shared/components/ui/chart";
 import {
   Card,
   CardContent,
@@ -10,25 +15,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-
-const chartData = [
-  { date: "2024-01-01", sales: 186},
-  { date: "2024-01-02", sales: 50 },
-  { date: "2024-01-02", sales: 50 },
-  { date: "2024-01-02", sales: 50 },
-  { date: "2024-01-02", sales: 50 },
-  { date: "2024-01-02", sales: 50 },
-  { date: "2024-01-02", sales: 50 },
-];
+import { CustomerStatistic } from "@/shared/types/customer";
 
 const chartConfig = {
-  sales: {
+  value: {
     label: "Vendas",
     color: "#2563eb",
   },
 } satisfies ChartConfig;
 
-export function SalesPerDayChart() {
+type SalesPerDayChartProps = {
+  customerStatistics: CustomerStatistic[];
+};
+
+export function SalesPerDayChart({
+  customerStatistics,
+}: SalesPerDayChartProps) {
+  const chartData = customerStatistics.map((statistic) => ({
+    ...statistic,
+    date: statistic.date.toISOString(),
+  }));
+
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6">
       <Card className="@container/card">
@@ -53,8 +60,7 @@ export function SalesPerDayChart() {
                 tickMargin={8}
                 minTickGap={32}
                 tickFormatter={(value) => {
-                  const date = new Date(value);
-                  return date.toLocaleDateString("pt-BR", {
+                  return new Date(value).toLocaleDateString("pt-BR", {
                     month: "short",
                     day: "numeric",
                   });
@@ -64,7 +70,7 @@ export function SalesPerDayChart() {
                 content={
                   <ChartTooltipContent
                     className="w-[150px]"
-                    nameKey="sales"
+                    nameKey="value"
                     labelFormatter={(value) => {
                       return new Date(value).toLocaleDateString("pt-BR", {
                         month: "short",
@@ -75,7 +81,7 @@ export function SalesPerDayChart() {
                   />
                 }
               />
-              <Bar dataKey="sales" fill="var(--color-sales)" radius={4} />
+              <Bar dataKey="value" fill="var(--color-value)" radius={4} />
             </BarChart>
           </ChartContainer>
         </CardContent>

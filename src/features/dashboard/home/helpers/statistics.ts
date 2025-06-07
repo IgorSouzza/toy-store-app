@@ -1,4 +1,4 @@
-import { Customer } from "@/shared/types/customer";
+import { Customer, CustomerStatistic } from "@/shared/types/customer";
 
 export function getTopSalesVolumeCustomer(customers: Customer[]) {
   let topCustomer: Customer | null = null;
@@ -77,4 +77,27 @@ export function getFirstMissingLetterInName(name: string): string {
   }
 
   return "-";
+}
+
+export function getTotalSalesPerDay(
+  customers: Customer[]
+): CustomerStatistic[] {
+  const salesMap = new Map<string, number>();
+
+  for (const customer of customers) {
+    for (const sale of customer.statistics.sales) {
+      const dateKey = new Date(sale.date).toISOString().slice(0, 10); 
+      salesMap.set(dateKey, (salesMap.get(dateKey) || 0) + sale.value);
+    }
+  }
+
+  const result: CustomerStatistic[] = Array.from(salesMap.entries()).map(
+    ([dateStr, value]) => ({
+      date: new Date(dateStr),
+      value,
+    })
+  );
+
+  result.sort((a, b) => a.date.getTime() - b.date.getTime());
+  return result;
 }
