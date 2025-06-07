@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧪 Projeto de Teste
 
-## Getting Started
+Este é um projeto de teste para demonstração de funcionalidades básicas de uma aplicação de gestão de clientes. Todos os dados são mockados (sem persistência real), com autenticação simulada e operações CRUD fictícias.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📌 Funcionalidades
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🔐 Autenticação
+- **Login simulado com token JWT (mock)**  
+- Validação de campos com `react-hook-form` e `zod`
+- Toasts de erro/sucesso com `sonner`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 👤 Clientes
+- **Listagem de clientes mockados**
+- **Criação de novos clientes com formulário validado**
+- Ao criar um cliente, são geradas automaticamente:
+  - Vendas com **datas aleatórias de janeiro/2024**
+  - **Valores aleatórios** entre 10 e 500
+  - Quantidade aleatória de vendas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📊 Gráficos
+- Visualização de vendas por dia com **Recharts**
+- Formatação de **data** e **valores monetários** com `Intl`
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧪 Mock de API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Os dados de clientes vêm de um mock (`customersMock`)
+- Endpoints disponíveis via API Routes (`/api/customers`):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### `GET /api/customers`
+- Retorna todos os clientes mockados  
+- Necessário header: `Authorization: Bearer <token>`
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### `POST /api/customers`
+- Adiciona um novo cliente com vendas simuladas  
+- Payload:
+  ```json
+  {
+    "name": "João da Silva",
+    "email": "joao@example.com",
+    "birthdate": "1990-10-10"
+  }
