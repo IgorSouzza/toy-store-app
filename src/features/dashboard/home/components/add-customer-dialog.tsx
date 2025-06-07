@@ -58,9 +58,7 @@ export function AddCustomerDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogOpenChange}>
       <DialogTrigger asChild>
-        <Button className="mx-6 self-end" type="button">
-          Novo cliente
-        </Button>
+        <Button type="button">Novo cliente</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

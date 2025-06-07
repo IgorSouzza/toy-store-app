@@ -7,6 +7,7 @@ import { CustomersTable } from "./components/customers-table";
 import { getCustomersAction } from "./actions/get-customers";
 import { getTotalSalesPerDay } from "./helpers/statistics";
 import { AddCustomerDialog } from "./components/add-customer-dialog";
+import { ResetCustomersButton } from "./components/reset-customers";
 
 export async function DashboardHomePage() {
   const customersResponse = await getCustomersAction();
@@ -36,7 +37,10 @@ export async function DashboardHomePage() {
               />
             </div>
             <div className="flex flex-col md:gap-6">
-              <AddCustomerDialog />
+              <div className="flex gap-2 mx-6 self-end">
+                <ResetCustomersButton />
+                <AddCustomerDialog />
+              </div>
               <CustomersTable customers={customersResponse.customers} />
             </div>
           </div>

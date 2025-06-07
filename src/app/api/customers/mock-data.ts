@@ -1,4 +1,4 @@
-export const customersMock = {
+export const originalCustomersMock = {
   data: {
     clientes: [
       {
@@ -47,3 +47,5 @@ export const customersMock = {
     status: "ok",
   },
 };
+
+export const customersMock = JSON.parse(JSON.stringify(originalCustomersMock));

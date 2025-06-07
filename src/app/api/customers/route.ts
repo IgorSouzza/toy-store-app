@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { customersMock } from "@/app/api/customers/mock-data";
+import { customersMock, originalCustomersMock } from "@/app/api/customers/mock-data";
 
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
@@ -45,4 +45,20 @@ export async function POST(req: NextRequest) {
   customersMock.meta.registroTotal = customersMock.data.clientes.length;
   
   return NextResponse.json({ status: "Cliente adicionado com sucesso!" });
+}
+
+export async function DELETE(req: NextRequest) {
+  const authHeader = req.headers.get("authorization");
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return NextResponse.json(
+      { error: "Unauthorized: Bearer token missing or invalid" },
+      { status: 401 }
+    );
+  }
+
+  customersMock.meta = JSON.parse(JSON.stringify(originalCustomersMock.meta));
+  customersMock.data = JSON.parse(JSON.stringify(originalCustomersMock.data));
+
+  return NextResponse.json({ status: "Clientes resetados com sucesso!" });
 }
