@@ -13,7 +13,7 @@ export function ResetCustomersButton() {
 
   return (
     <Button variant="outline" onClick={handleResetCustomers}>
-      Voltar clientes ao estado original
+      Remover clientes randômicos
     </Button>
   );
 }

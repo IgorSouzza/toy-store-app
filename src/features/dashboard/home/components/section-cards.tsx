@@ -22,7 +22,7 @@ export function SectionCards({ customers }: SectionCardsProps) {
   const topAverageSaleValueCustomer = getTopAverageSaleValueCustomer(customers);
   const topPurchaseFrequencyCustomer =
     getTopPurchaseFrequencyCustomer(customers);
-
+  
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
       <Card className="@container/card">
@@ -47,7 +47,7 @@ export function SectionCards({ customers }: SectionCardsProps) {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            {topSalesVolumeCustomer?.customer.name}
+            {topAverageSaleValueCustomer?.customer.name}
           </div>
         </CardFooter>
       </Card>
@@ -60,7 +60,7 @@ export function SectionCards({ customers }: SectionCardsProps) {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            {topSalesVolumeCustomer?.customer.name}
+            {topPurchaseFrequencyCustomer?.customer.name}
           </div>
         </CardFooter>
       </Card>

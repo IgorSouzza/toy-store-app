@@ -71,6 +71,12 @@ export function SalesPerDayChart({
                   <ChartTooltipContent
                     className="w-[150px]"
                     nameKey="value"
+                    formatter={(value) =>
+                      value.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })
+                    }
                     labelFormatter={(value) => {
                       return new Date(value).toLocaleDateString("pt-BR", {
                         month: "short",

@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
+  const randomSales = generateRandomSales()
   customersMock.data.clientes.push({
     info: {
       nomeCompleto: body.name,
@@ -39,7 +40,7 @@ export async function POST(req: NextRequest) {
       },
     },
     estatisticas: {
-      vendas: generateRandomSales(),
+      vendas: randomSales,
     },
   });
   customersMock.meta.registroTotal = customersMock.data.clientes.length;

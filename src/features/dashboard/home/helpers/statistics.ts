@@ -49,7 +49,7 @@ export function getTopPurchaseFrequencyCustomer(customers: Customer[]) {
       topCustomer = customer;
     }
   }
-
+  
   return topCustomer
     ? { customer: topCustomer, purchaseCount: maxFrequency }
     : null;

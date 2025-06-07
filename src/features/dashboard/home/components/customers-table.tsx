@@ -12,6 +12,7 @@ import {
   getFirstMissingLetterInName,
   getTotalSalesValue,
 } from "../helpers/statistics";
+import { Badge } from "@/shared/components/ui/badge";
 
 type CustomersTableProps = {
   customers: Customer[];
@@ -23,7 +24,7 @@ export function CustomersTable({ customers }: CustomersTableProps) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Nome</TableHead>
+            <TableHead className="min-w-[100px]">Nome</TableHead>
             <TableHead>E-mail</TableHead>
             <TableHead>Data de nascimento</TableHead>
             <TableHead>Primeira letra ausente</TableHead>
@@ -37,7 +38,7 @@ export function CustomersTable({ customers }: CustomersTableProps) {
               <TableCell>{customer.email}</TableCell>
               <TableCell>{formatDate(customer.birthday)}</TableCell>
               <TableCell className="uppercase">
-                {getFirstMissingLetterInName(customer.name)}
+                <Badge variant='outline'>{getFirstMissingLetterInName(customer.name)}</Badge>
               </TableCell>
               <TableCell className="text-right">
                 {formatCurrency(getTotalSalesValue(customer))}
