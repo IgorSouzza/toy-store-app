@@ -14,7 +14,7 @@ export function formatDate(
   locale: string = "pt-BR",
   options?: Intl.DateTimeFormatOptions
 ): string {
-  const date = new Date(dateString);
+  const date = new Date(dateString.slice(0, 10).replace(/-/g, "/"));
   return new Intl.DateTimeFormat(locale, {
     day: "2-digit",
     month: "long",

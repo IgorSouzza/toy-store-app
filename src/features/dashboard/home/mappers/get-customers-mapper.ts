@@ -1,5 +1,5 @@
 import { Customer } from "@/shared/types/customer";
-import { CustomersHttpResponse } from "./get-customers";
+import { CustomersHttpResponse } from "../actions/get-customers";
 
 type DomainCustomersResponse = {
   customers: Customer[];

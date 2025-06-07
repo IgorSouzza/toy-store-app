@@ -4,9 +4,9 @@ import { SiteHeader } from "@/shared/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/shared/components/ui/sidebar";
 import { SalesPerDayChart } from "./components/sales-per-day-chart";
 import { CustomersTable } from "./components/customers-table";
-import { Button } from "@/shared/components/ui/button";
 import { getCustomersAction } from "./actions/get-customers";
 import { getTotalSalesPerDay } from "./helpers/statistics";
+import { AddCustomerDialog } from "./components/add-customer-dialog";
 
 export async function DashboardHomePage() {
   const customersResponse = await getCustomersAction();
@@ -36,7 +36,7 @@ export async function DashboardHomePage() {
               />
             </div>
             <div className="flex flex-col md:gap-6">
-              <Button className="w-fit mx-6 self-end">Adicionar cliente</Button>
+              <AddCustomerDialog />
               <CustomersTable customers={customersResponse.customers} />
             </div>
           </div>

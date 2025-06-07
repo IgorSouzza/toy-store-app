@@ -2,7 +2,7 @@
 
 import { api } from "@/shared/lib/axios";
 
-import { getCustomersMapper } from "./get-customers-mapper";
+import { getCustomersMapper } from "../mappers/get-customers-mapper";
 
 export type CustomersHttpResponse = {
   data: {

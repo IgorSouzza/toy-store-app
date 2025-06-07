@@ -26,12 +26,23 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!body || !body.info || !body.estatisticas) {
+  if (!body) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  customersMock.data.clientes.push(body);
+  customersMock.data.clientes.push({
+    info: {
+      nomeCompleto: body.name,
+      detalhes: {
+        email: body.email,
+        nascimento: body.birthdate,
+      },
+    },
+    estatisticas: {
+      vendas: [],
+    },
+  });
   customersMock.meta.registroTotal = customersMock.data.clientes.length;
-
+  
   return NextResponse.json({ status: "Cliente adicionado com sucesso!" });
 }
