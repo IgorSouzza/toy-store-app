@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/shared/components/ui/table";
 
-export function ClientsTable() {
+export function CustomersTable() {
   return (
     <div className="px-4 lg:px-6">
       <Table>

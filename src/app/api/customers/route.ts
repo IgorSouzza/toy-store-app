@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { clientsMock } from "@/app/api/clients/mock-data";
+import { customersMock } from "@/app/api/customers/mock-data";
 
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  return NextResponse.json(clientsMock);
+  return NextResponse.json(customersMock);
 }
 
 export async function POST(req: NextRequest) {
@@ -30,8 +30,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  clientsMock.data.clientes.push(body);
-  clientsMock.meta.registroTotal = clientsMock.data.clientes.length;
+  customersMock.data.clientes.push(body);
+  customersMock.meta.registroTotal = customersMock.data.clientes.length;
 
   return NextResponse.json({ status: "Cliente adicionado com sucesso!" });
 }

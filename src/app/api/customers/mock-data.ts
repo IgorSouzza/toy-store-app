@@ -1,4 +1,4 @@
-export const clientsMock = {
+export const customersMock = {
   data: {
     clientes: [
       {

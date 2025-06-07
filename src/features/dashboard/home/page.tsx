@@ -3,10 +3,14 @@ import { AppSidebar } from "@/shared/components/sidebar";
 import { SiteHeader } from "@/shared/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/shared/components/ui/sidebar";
 import { SalesPerDayChart } from "./components/sales-per-day-chart";
-import { ClientsTable } from "./components/clients-table";
+import { CustomersTable } from "./components/customers-table";
 import { Button } from "@/shared/components/ui/button";
+import { getCustomersAction } from "./actions/get-customers";
 
-export function DashboardHomePage() {
+export async function DashboardHomePage() {
+  const customers = await getCustomersAction();
+  console.log(customers);
+
   return (
     <SidebarProvider
       style={
@@ -29,7 +33,7 @@ export function DashboardHomePage() {
             </div>
             <div className="flex flex-col md:gap-6">
               <Button className="w-fit mx-6 self-end">Adicionar cliente</Button>
-              <ClientsTable />
+              <CustomersTable />
             </div>
           </div>
         </div>
