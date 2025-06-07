@@ -33,7 +33,7 @@ export function SalesPerDayChart({
 }: SalesPerDayChartProps) {
   const chartData = customerStatistics.map((statistic) => ({
     ...statistic,
-    date: statistic.date.toISOString(),
+    date: statistic.date.toISOString().slice(0, 10).replace(/-/g, "/"),
   }));
 
   return (
