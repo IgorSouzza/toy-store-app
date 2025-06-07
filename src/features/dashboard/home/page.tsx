@@ -25,7 +25,7 @@ export async function DashboardHomePage() {
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2 space-y-4">
             <div className="flex flex-col gap-4 mt-4 md:mt-6 md:gap-6">
-              <SectionCards />
+              <SectionCards customers={customersResponse.customers} />
             </div>
             <div className="flex flex-col md:gap-6">
               <SalesPerDayChart />

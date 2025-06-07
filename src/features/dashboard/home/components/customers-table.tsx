@@ -7,6 +7,11 @@ import {
   TableRow,
 } from "@/shared/components/ui/table";
 import { Customer } from "@/shared/types/customer";
+import { formatCurrency } from "@/shared/utils/formatters";
+import {
+  getFirstMissingLetterInName,
+  getTotalSalesValue,
+} from "../helpers/statistics";
 
 type CustomersTableProps = {
   customers: Customer[];
@@ -21,7 +26,7 @@ export function CustomersTable({ customers }: CustomersTableProps) {
             <TableHead className="w-[100px]">Nome</TableHead>
             <TableHead>E-mail</TableHead>
             <TableHead>Data de nascimento</TableHead>
-            <TableHead>Alfabeto</TableHead>
+            <TableHead>Primeira letra ausente</TableHead>
             <TableHead className="text-right">Total vendas</TableHead>
           </TableRow>
         </TableHeader>
@@ -31,8 +36,12 @@ export function CustomersTable({ customers }: CustomersTableProps) {
               <TableCell className="font-medium">{customer.name}</TableCell>
               <TableCell>{customer.email}</TableCell>
               <TableCell>{customer.birthday}</TableCell>
-              <TableCell>ABCDEFGHIJKLMNOPQRSTUVXYZ</TableCell>
-              <TableCell className="text-right">$250.00</TableCell>
+              <TableCell className="uppercase">
+                {getFirstMissingLetterInName(customer.name)}
+              </TableCell>
+              <TableCell className="text-right">
+                {formatCurrency(getTotalSalesValue(customer))}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
