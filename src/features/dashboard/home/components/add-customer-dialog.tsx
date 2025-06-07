@@ -64,7 +64,7 @@ export function AddCustomerDialog() {
         <DialogHeader>
           <DialogTitle>Novo cliente</DialogTitle>
           <DialogDescription>
-            Preencha os dados do novo cliente.
+            *O cliente será criado com estatísticas randômicas.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onAddCustomer)}>

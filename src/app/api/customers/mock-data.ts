@@ -49,3 +49,22 @@ export const originalCustomersMock = {
 };
 
 export const customersMock = JSON.parse(JSON.stringify(originalCustomersMock));
+
+export function generateRandomSales(): { data: string; valor: number }[] {
+  const salesCount = Math.floor(Math.random() * 5) + 1;
+  const sales: { data: string; valor: number }[] = [];
+
+  for (let i = 0; i < salesCount; i++) {
+    const day = Math.floor(Math.random() * 31) + 1;
+    const date = new Date(2024, 0, day);
+
+    const value = Math.floor(Math.random() * (500 - 10 + 1)) + 10;
+
+    sales.push({
+      data: date.toISOString().split("T")[0],
+      valor: value,
+    });
+  }
+
+  return sales;
+}
