@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { LoaderCircle } from "lucide-react";
 
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
@@ -74,8 +75,15 @@ export function SignInForm({
             </p>
           )}
         </div>
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          Login
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <LoaderCircle className="animate-spin" />
+              <span>Login</span>
+            </>
+          ) : (
+            "Login"
+          )}
         </Button>
       </div>
       <div className="text-center text-sm">
