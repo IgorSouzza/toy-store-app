@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/shared/components/ui/table";
 import { Customer } from "@/shared/types/customer";
-import { formatCurrency } from "@/shared/utils/formatters";
+import { formatCurrency, formatDate } from "@/shared/utils/formatters";
 import {
   getFirstMissingLetterInName,
   getTotalSalesValue,
@@ -35,7 +35,7 @@ export function CustomersTable({ customers }: CustomersTableProps) {
             <TableRow key={customer.id}>
               <TableCell className="font-medium">{customer.name}</TableCell>
               <TableCell>{customer.email}</TableCell>
-              <TableCell>{customer.birthday}</TableCell>
+              <TableCell>{formatDate(customer.birthday)}</TableCell>
               <TableCell className="uppercase">
                 {getFirstMissingLetterInName(customer.name)}
               </TableCell>

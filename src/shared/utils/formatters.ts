@@ -8,3 +8,17 @@ export function formatCurrency(
     currency: currency,
   }).format(value);
 }
+
+export function formatDate(
+  dateString: string,
+  locale: string = "pt-BR",
+  options?: Intl.DateTimeFormatOptions
+): string {
+  const date = new Date(dateString);
+  return new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    ...options,
+  }).format(date);
+}
