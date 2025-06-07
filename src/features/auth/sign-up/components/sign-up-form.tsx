@@ -14,11 +14,13 @@ import { cn } from "@/shared/lib/utils";
 
 import { SignUpFormSchema, signUpFormSchema } from "../schemas/sign-up-schema";
 import { signUpAction } from "../actions/sign-up-action";
+import { useState } from "react";
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
+  const [submiting, setSubmiting] = useState(false);
   const router = useRouter();
   const signInForm = useForm<SignUpFormSchema>({
     resolver: zodResolver(signUpFormSchema),
@@ -27,14 +29,16 @@ export function SignUpForm({
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = signInForm;
 
   async function onSignIn(data: SignUpFormSchema) {
     try {
+      setSubmiting(true);
       await signUpAction(data);
       router.push("/dashboard");
     } catch (error) {
+      setSubmiting(false);
       if (!(error instanceof Error)) return;
       toast.error("Uh oh! Something went wrong.", {
         description: error.message,
@@ -99,8 +103,8 @@ export function SignUpForm({
             </p>
           )}
         </div>
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? (
+        <Button type="submit" disabled={submiting}>
+          {submiting ? (
             <>
               <LoaderCircle className="animate-spin" />
               <span>Cadastrar</span>
