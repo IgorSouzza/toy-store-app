@@ -2,7 +2,12 @@ import { z } from "zod";
 
 export const signUpFormSchema = z
   .object({
-    name: z.string().min(1).max(255),
+    name: z
+      .string()
+      .trim()
+      .min(2, "O nome precisa ter no mínimo 2 caracteres")
+      .max(255)
+      .regex(/^[A-Za-zÀ-ÿ\s]+$/, "O nome deve conter apenas letras"),
     email: z.string().email("E-mail inválido"),
     password: z.string().min(3, "Senha inválida"),
     confirm_password: z
