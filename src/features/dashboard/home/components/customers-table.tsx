@@ -13,6 +13,7 @@ import {
   getTotalSalesValue,
 } from "../helpers/statistics";
 import { Badge } from "@/shared/components/ui/badge";
+import { CustomerSalesDetails } from "./customer-sales-details";
 
 type CustomersTableProps = {
   customers: Customer[];
@@ -29,6 +30,7 @@ export function CustomersTable({ customers }: CustomersTableProps) {
             <TableHead>Data de nascimento</TableHead>
             <TableHead>Primeira letra ausente</TableHead>
             <TableHead className="text-right">Total vendas</TableHead>
+            <TableHead />
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -38,10 +40,15 @@ export function CustomersTable({ customers }: CustomersTableProps) {
               <TableCell>{customer.email}</TableCell>
               <TableCell>{formatDate(customer.birthday)}</TableCell>
               <TableCell className="uppercase">
-                <Badge variant='outline'>{getFirstMissingLetterInName(customer.name)}</Badge>
+                <Badge variant="outline">
+                  {getFirstMissingLetterInName(customer.name)}
+                </Badge>
               </TableCell>
               <TableCell className="text-right">
                 {formatCurrency(getTotalSalesValue(customer))}
+              </TableCell>
+              <TableCell className="text-right">
+                <CustomerSalesDetails customer={customer} />
               </TableCell>
             </TableRow>
           ))}
