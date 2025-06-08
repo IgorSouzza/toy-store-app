@@ -13,12 +13,14 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/shared/components/ui/table";
 import { Customer } from "@/shared/types/customer";
 import { formatCurrency, formatDate } from "@/shared/utils/formatters";
+import { getTotalSalesValue } from "../helpers/statistics";
 
 type CustomerSalesDetailsProps = {
   customer: Customer;
@@ -58,6 +60,14 @@ export function CustomerSalesDetails({ customer }: CustomerSalesDetailsProps) {
                   </TableRow>
                 ))}
               </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TableCell>Total</TableCell>
+                  <TableCell className="text-right font-medium">
+                    {formatCurrency(getTotalSalesValue(customer))}
+                  </TableCell>
+                </TableRow>
+              </TableFooter>
             </Table>
           ) : (
             <span className="text-sm mt-2 text-muted-foreground">
